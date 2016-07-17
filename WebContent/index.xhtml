@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"      
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:p="http://primefaces.org/ui">
+	
+    <h:head>
+        <title>jsf4birt</title>
+        
+    </h:head>
+    <h:body>
+    <h:outputStylesheet library="css" name="tooltip.css"  />
+    <f:loadBundle basename="org.krisbox.jsf4birt.messages" var="msg"/>
+            <b:container>
+            <b:row>
+            	<h:form>
+            		<b:panelGrid colSpans="2,8,2">
+            			<h:outputText style="vertical-align: top;" value="#{msg.lblReportdesign}"/>
+            	   		<b:inputText style="vertical-align: top;" class="reportdesign" id="reportdesign" value="#{birtBean.reportdesign}"/>
+            	   		<i style="vertical-align: top;" class="fa fa-info-circle" title="#{msg.reportDesignHelp}"></i>
+            		</b:panelGrid>
+            		
+    	   			<b:commandButton value="${msg.btnGetParameters}" execute="reportdesign" /> <b:button class="render" id="btnRender" value="${msg.btnExecuteReport}"/>
+    	   			
+    	   			<b:dataTable id="output" value="#{birtBean.parameters}" var="o"
+	    				styleClass="order-table"
+	    				headerClass="order-table-header"
+    					rowClasses="order-table-odd-row,order-table-even-row"
+             			fixedHeader="true"
+             			scroll-size="400px"
+             			scroll-x="false"
+             			responsive="true"
+             			searching="false"   					
+    				>
+    					<b:dataTableColumn rendered="${birtBean.total ne '0'}">
+    						<f:facet name="header">
+    							<h:outputText value="Parameter Name"/>
+    						</f:facet>
+    						<h:outputText class="parameter_name" value="#{o.name}"/>
+    					</b:dataTableColumn>
+    					<b:dataTableColumn><h:inputText class="parameter_value" value="#{o.defaultValue}"/>
+    					    <f:facet name="header">
+						    	<h:outputText value="Parameter"/>
+    						</f:facet>
+    					</b:dataTableColumn>
+    					<b:dataTableColumn value="#{o.autoSuggestThreshold}"         rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.cascadingParentName}"          rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.columnType}"         			 rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.controlType}"         		 rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.dataSourceType}"         		 rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.dataType}"         			 rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.defaultTableValues}"           rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.defaultValue}"         		 rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.defaultValueIsNull}"         	 rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.displayName}"         	     rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.group}"         				 rendered="${birtBean.total ne '0'}"/>
+    					<!-- <b:dataTableColumn value="#{o.groupPromptText}"         rendered="${birtBean.total ne '0'}"/>  -->
+    					<b:dataTableColumn value="#{o.helpText}"         			 rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.isAdHoc}"         			 rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.isDynamicSelectionList}"       rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.isHidden}"         			 rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.isPassword}"         			 rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.isRequired}"         			 rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.isViewParameter}"         	 rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.name}"         				 rendered="${birtBean.total ne '0'}"/>
+    					<!-- <b:dataTableColumn value="#{o.promptText}"         	 rendered="${birtBean.total ne '0'}"/> -->
+    					<b:dataTableColumn value="#{o.selectNameValueList}"          rendered="${birtBean.total ne '0'}"/>
+    					<b:dataTableColumn value="#{o.selectValueList}"         	 rendered="${birtBean.total ne '0'}"/>
+    					<!-- <b:dataTableColumn value="#{o.startExpended}"           rendered="${birtBean.total ne '0'}"/> -->
+    					<!-- <b:dataTableColumn value="#{o.valueIsNull}"             rendered="${birtBean.total ne '0'}"/> -->
+    				</b:dataTable>
+    				<br/>
+    				<div id="container1"></div>
+            	</h:form>
+            	<h:outputScript library="js" name="jquery-3.1.0.js" target="head"/>
+            	<h:outputScript library="js" name="iv.js" target="head"/>
+            </b:row>
+        </b:container>
+    </h:body>
+</html>
